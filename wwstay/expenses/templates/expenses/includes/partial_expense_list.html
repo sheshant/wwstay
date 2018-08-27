@@ -1,0 +1,27 @@
+{% for expense in expenses %}
+	<tr>
+		<td>{{ expense.id }}</td>
+		<td>{{ expense.title }}</td>
+		<td>{{ expense.description }}</td>
+		<td>{{ expense.user }}</td>
+		<td>{{ expense.price }}</td>
+		<td>{{ expense.created_at }}</td>
+		<td>{{ expense.get_image_path_with_html | safe }}</td>
+		<td style="width: 150px">
+			<button type="button"
+							class="btn btn-warning btn-sm js-update-expense"
+							data-url="{% url 'expenses:expense_update' expense.id %}">
+				<span class="glyphicon glyphicon-pencil"></span> Edit
+			</button>
+			<button type="button"
+							class="btn btn-danger btn-sm js-delete-expense"
+							data-url="{% url 'expenses:expense_delete' expense.id %}">
+				<span class="glyphicon glyphicon-trash"></span> Delete
+			</button>
+		</td>
+	</tr>
+{% empty %}
+	<tr>
+		<td colspan="8" class="text-center bg-warning">No expense</td>
+	</tr>
+{% endfor %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block javascript %}
+	<script src="{% static 'expenses/js/expenses.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <script>
+        function updateQueryStringParameter(uri, key, value) {
+            var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+            var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+            if (uri.match(re)) {
+                return uri.replace(re, '$1' + key + "=" + value + '$2');
+            }
+            else {
+                return uri + separator + key + "=" + value;
+            }
+        }
+
+        function sort(sort_column) {
+            var url = updateQueryStringParameter(window.location.href, 'sort', sort_column);
+            window.location.href = url;
+        }
+
+    </script>
+
+	<h1 class="page-header">Expenses</h1>
+    <div>
+        <h4> Total Expense = {{ total_expense }} </h4>
+    </div>
+	<p>
+		<button type="button" class="btn btn-primary js-create-expense" data-url="{% url 'expenses:expense_create' %}">
+			<span class="glyphicon glyphicon-plus"></span>
+			New expense
+		</button>
+	</p>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sort
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button class="dropdown-item" type="button" onclick="sort('title')">Title</button>
+            <button class="dropdown-item" type="button" onclick="sort('created_at')">created at</button>
+            <button class="dropdown-item" type="button" onclick="sort('price')">Price</button>
+        </div>
+    </div>
+
+
+	<table class="table" id="expense-table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Title</th>
+				<th>Description</th>
+				<th>User</th>
+				<th>Price</th>
+				<th>Created At</th>
+				<th>Image</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% include 'expenses/includes/partial_expense_list.html' %}
+		</tbody>
+	</table>
+
+	<div class="modal fade" id="modal-expense">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+			</div>
+		</div>
+	</div>
+{% endblock %}
