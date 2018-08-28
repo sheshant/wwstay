@@ -21,8 +21,6 @@ def save_expense_form(request, form, template_name):
     data = dict()
     if request.method == 'POST':
         if form.is_valid():
-            import pdb
-            pdb.set_trace()
             expense = form.save(commit=False)
             expense.user = request.user
             expense.save()

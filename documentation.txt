@@ -1,0 +1,20 @@
+This is the documentation for the project Expenses manager 
+
+for admin screen, the username is "sheshant" and password is "recursive"
+
+To run the project, create a virtual environment and install all the files from requirements.txt
+The defalt database used here is sqlite which is default internal database for python django project
+to start the app, go to the folder having manage.py file and run the command ./manage.py runserver and go to url 
+'http://localhost:8000/expenses/'
+this will lead to the home screen.
+
+First signup and login. The link is provided above. and then 
+to view all the expenses click on expenses. This will display all the expenses and so here you can create a new expense after 
+clicking on the new texpense button and it will display a modal with all the required fields. Fill up all the fields. For date, use format 'YYYY-MM-DD'
+
+similarly you have option to edit and delete also 
+
+the total expenses will be displayed and you can apply sort operations from the sort fields.
+
+You can also go for the admin screen to see the table structure
+
